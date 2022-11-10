@@ -32,6 +32,7 @@ public class SelenideTest {
         $(".notification__title").shouldBe(visible, Duration.ofSeconds(15));
         $(".notification__title").find(String.valueOf(exactText("Успешно!")));
         $("[data-test-id=notification] .notification__content").should(exactText("Встреча успешно забронирована на " + date));
+
     }
 
     @Test
