@@ -1,9 +1,7 @@
 package ru.netology;
-
-import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,26 +18,31 @@ public class SelenideTest {
         open("http://localhost:9999");
     }
 
+    public String generateDate(long addDays, String pattern) {
+        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
+    }
+
     @Test
     void shouldCheckCorrectForm() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Омск");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        String dateStr = generateDate(3, "dd.MM.yyyy");
+        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(dateStr);
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[data-test-id=agreement]").click();
         $("[type='button'] .button__text").click();
         $(".notification__title").shouldBe(visible, Duration.ofSeconds(15));
         $(".notification__title").find(String.valueOf(exactText("Успешно!")));
-        $("[data-test-id=notification] .notification__content").should(exactText("Встреча успешно забронирована на " + date));
+        $("[data-test-id=notification] .notification__content").should(exactText("Встреча успешно забронирована на " + dateStr));
 
     }
 
     @Test
     void shouldUnCheckCorrectCity() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Караганда");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[data-test-id=agreement]").click();
@@ -51,8 +54,8 @@ public class SelenideTest {
     void shouldUnCheckCorrectDate() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        String date = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(1, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[data-test-id=agreement]").click();
@@ -64,8 +67,8 @@ public class SelenideTest {
     void shouldUnCheckCorrectName() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Ivan Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[data-test-id=agreement]").click();
@@ -78,8 +81,8 @@ public class SelenideTest {
     void shouldUnCheckCorrectPhone() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("55566");
         $("[data-test-id=agreement]").click();
@@ -91,8 +94,8 @@ public class SelenideTest {
     void shouldUnCheckCorrectCheck() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[type='button'] .button__text").click();
@@ -103,8 +106,8 @@ public class SelenideTest {
     void shouldUnCheckCorrectNameEmpty() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        String date = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(date);
+        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
         $("[data-test-id=agreement]").click();
         $("[type='button'] .button__text").click();
