@@ -28,7 +28,7 @@ public class SenenideTask2Test {
         $(".input_type_tel .input__icon").click();
         int dateAddDD = lDateAdd.getDayOfMonth();
         if (dateNowMM != dateAddMM) {
-            $$(".calendar__arrow").find(attribute("data-step","1")).click();
+            $$(".calendar__arrow").find(attribute("data-step", "1")).click();
         }
         $$(".calendar__day").find(text(String.valueOf(dateAddDD))).click();
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
