@@ -25,7 +25,7 @@ public class SelenideTest {
     @Test
     void shouldCheckCorrectForm() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Омск");
-        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         String dateStr = generateDate(3, "dd.MM.yyyy");
         $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(dateStr);
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
@@ -41,7 +41,7 @@ public class SelenideTest {
     @Test
     void shouldUnCheckCorrectCity() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Караганда");
-        $("[data-test-id='date'] input").sendKeys("Delete");
+        $("[data-test-id='date'] [placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
@@ -54,7 +54,6 @@ public class SelenideTest {
     void shouldUnCheckCorrectDate() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        $("[data-test-id='date'] input").sendKeys("Delete");
         $("[data-test-id='date'] input").sendKeys(generateDate(1, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
@@ -67,7 +66,6 @@ public class SelenideTest {
     void shouldUnCheckCorrectName() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        $("[data-test-id='date'] input").sendKeys("Delete");
         $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Ivan Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
@@ -81,7 +79,6 @@ public class SelenideTest {
     void shouldUnCheckCorrectPhone() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        $("[data-test-id='date'] input").sendKeys("Delete");
         $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("55566");
@@ -94,7 +91,6 @@ public class SelenideTest {
     void shouldUnCheckCorrectCheck() {
         $("[data-test-id='city'] [placeholder='Город']").sendKeys("Москва");
         $(".input_type_tel [type='tel']").doubleClick().sendKeys("Delete");
-        $("[data-test-id='date'] input").sendKeys("Delete");
         $("[data-test-id='date'] input").sendKeys(generateDate(3, "dd.MM.yyyy"));
         $("[data-test-id='name'] [name='name']").sendKeys("Иван Иванов");
         $("[data-test-id='phone'] [name='phone']").sendKeys("+79012345678");
